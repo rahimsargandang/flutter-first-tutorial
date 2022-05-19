@@ -21,31 +21,49 @@ class MyAppState extends State<MyApp> {
   final questions = const [
     {
       'questionText': 'What is your favorite color?',
-      'answers': ['Black', 'Red', 'Blue', 'Green'],
+      'answers': [
+        {'text': 'Black', 'score': 10},
+        {'text': 'Blue', 'score': 5},
+        {'text': 'Red', 'score': 7},
+        {'text': 'Green', 'score': 3}
+      ],
     },
     {
       'questionText': 'What is your favorite animal?',
-      'answers': ['Dog', 'Cat', 'Snake', 'Tiger'],
+      'answers': [
+        {'text': 'tiger', 'score': 10},
+        {'text': 'cat', 'score': 5},
+        {'text': 'Dog', 'score': 7},
+        {'text': 'rat', 'score': 3}
+      ],
     },
     {
       'questionText': 'What is your favorite Country?',
-      'answers': ['MY', 'UK', 'US'],
+      'answers': [
+        {'text': 'MY', 'score': 10},
+        {'text': 'IND', 'score': 5},
+        {'text': 'UK', 'score': 7},
+        {'text': 'US', 'score': 3}
+      ],
     },
   ];
 
-  var questionIndex = 0;
+  var _questionIndex = 0;
+  var _totalScore = 0;
 
-  void answerQuestion() {
-    if (questionIndex < questions.length) {
+  void _answerQuestion(int score) {
+    _totalScore += score;
+
+    if (_questionIndex < questions.length) {
       print('you have one more question');
     } else {
       print('You did it');
     }
 
     setState(() {
-      questionIndex = questionIndex + 1;
+      _questionIndex = _questionIndex + 1;
     });
-    print(questionIndex);
+    print(_questionIndex);
   }
 
   @override
@@ -55,13 +73,13 @@ class MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('My FIrst App'),
         ),
-        body: questionIndex < questions.length
+        body: _questionIndex < questions.length
             ? Quiz(
-                answerQuestion: answerQuestion,
-                questionIndex: questionIndex,
+                answerQuestion: _answerQuestion,
+                questionIndex: _questionIndex,
                 questions: questions,
               )
-            : Result(),
+            : Result(_totalScore),
       ),
     );
   }
