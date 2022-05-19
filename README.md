@@ -2,6 +2,6 @@
 
 A new Flutter project.
 
-First Flutter quiz app tutorial by Abdul Rahim.
+First Flutter quiz app tutorial.
 
 
